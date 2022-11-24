@@ -31,3 +31,20 @@ fu! vimproj#jump_to_function()
     exe 'tag '.s:target
 endfu
 
+fu! vimproj#get_tags_cn_path()
+    let ret=''
+    for dir in pathogen#split(&rtp)
+        "优先判断中文文档
+        let filename=dir.pathogen#slash().'doc'.pathogen#slash().'tags-cn'
+        if filereadable(filename)
+            let ret=ret.','.filename
+        else
+            "判断英文文档
+            let filename=dir.pathogen#slash().'doc'.pathogen#slash().'tags'
+            if filereadable(filename)
+                let ret=ret.','.filename
+            endif
+        endif
+    endfor
+    return ret
+endfu

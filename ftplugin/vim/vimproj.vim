@@ -10,6 +10,6 @@ if !vimproj#init()
     finish
 endif
 
-:set tags=vim.tags,./tags,C:\Vim\vimfiles\bundle\vimcdoc\doc\tags-cn
+sil! exe ':set tags=vim.tags,./tags,'.vimproj#get_tags_cn_path()
 :map \d :call vimproj#jump_to_cmd()<CR>
 :map \g :call vimproj#jump_to_function()<CR>

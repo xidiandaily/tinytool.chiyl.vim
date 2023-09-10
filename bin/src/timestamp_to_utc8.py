@@ -89,12 +89,12 @@ if args.enable_debug_log:
     stdout.setFormatter(detailformatter)
     logger.debug("if enable_debug_log, you will see this log")
 
-#if not args.infile or not args.outfile:
-#    parser.print_help()
-#    sys.exit()
-#
-#timestamp_to_utc8(args.infile,args.outfile)
-in_path="G:/CodeBase.p4/trunkmain.Server_proj/.vimtmp.in.timestamp_to_utc8"
-out_path="G:/CodeBase.p4/trunkmain.Server_proj/.vimtmp.out.timestamp_to_utc8"
-timestamp_to_utc8(in_path,out_path)
+if not args.infile or not args.outfile:
+    parser.print_help()
+    sys.exit()
+
+timestamp_to_utc8(args.infile,args.outfile)
+#in_path="D:/GitBase/myLGameTools2/.vimtmp.in.timestamp_to_utc8"
+#out_path="D:/GitBase/myLGameTools2/.vimtmp.out.timestamp_to_utc8"
+#timestamp_to_utc8(in_path,out_path)
 

@@ -6,15 +6,17 @@
 " Version:     1.0.0
 "==============================================================================
 function! tinytoolchiyl#base#zone_send_to_client_cs_msg#doit()
-    let s:in='.vimtmp.in.zone_send_to_client_cs_msg'
-    let s:out='.vimtmp.out.zone_send_to_client_cs_msg'
+    "let s:in='.vimtmp.in.zone_send_to_client_cs_msg'
+    "let s:out='.vimtmp.out.zone_send_to_client_cs_msg'
+    let s:in=tinytoolchiyl#base#gettmploopfilename#getname()
+    let s:out=tinytoolchiyl#base#gettmploopfilename#getname()
     let s:prev_win=win_getid()
-    if filereadable(s:in)
-        call delete(s:in)
-    endif
-    if filereadable(s:out)
-        call delete(s:out)
-    endif
+    "if filereadable(s:in)
+    "    call delete(s:in)
+    "endif
+    "if filereadable(s:out)
+    "    call delete(s:out)
+    "endif
     call writefile(split(@*,"\n"),s:in)
     silent! execute 'python' . (has('python3') ? '3' : '') . ' zone_send_to_client_cs_msg("'.s:in.'","'.s:out.'")'
     call win_gotoid(s:prev_win)

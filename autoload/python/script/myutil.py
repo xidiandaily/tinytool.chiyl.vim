@@ -66,3 +66,20 @@ def asynid_to_info(asyncid):
         return ret
     except:
         return ret
+
+def asyncstr_to_ulong(str_list):
+    if len(str_list) >= 4:
+        ty = int(str_list[0])
+        func = int(str_list[1])
+        inst = int(str_list[2])
+        seq = int(str_list[3].split('.')[0])
+        id = (ty & 0xfff) << 52 | (func & 0xff) << 44 | (inst & 0x3fff) << 30 | (seq & 0x3fffffff)
+        return id
+    else:
+        return 0
+
+def asynid_to_asyncstr(num):
+    id = int(num)
+    asyncstr="{}_{}_{}_{}".format(((id >> 52) & 0xfff), ((id >> 44) & 0xff), ((id >> 30) & 0x3fff), (id & 0x3fffffff))
+    return asyncstr
+

@@ -8,7 +8,7 @@ timestamp:
 	mv dist/timestamp_to_utc8.exe ../exe/
 
 run:
-	python timestamp_to_utc8.py
+	python timestamp_to_utc8.py -i G:/CodeBase.p4/release_4.4.0.Server_proj/.vimtmp.in.timestamp_to_utc8 -o G:/CodeBase.p4/release_4.4.0.Server_proj/.vimtmp.out.timestamp_to_utc8
 
 clean:
 	rm -rf ./dist

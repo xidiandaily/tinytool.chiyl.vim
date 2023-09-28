@@ -8,15 +8,17 @@
 let s:cscmd_path="./protocol/star_cs.xml"
 
 function! tinytoolchiyl#base#zone_deal_tconnd_pkg_to_cmd#doit()
-    let s:in='.vimtmp.in.zone_deal_tconnd_pkg_to_cmd'
-    let s:out='.vimtmp.out.zone_deal_tconnd_pkg_to_cmd'
+    "let s:in='.vimtmp.in.zone_deal_tconnd_pkg_to_cmd'
+    "let s:out='.vimtmp.out.zone_deal_tconnd_pkg_to_cmd'
+    let s:in=tinytoolchiyl#base#gettmploopfilename#getname()
+    let s:out=tinytoolchiyl#base#gettmploopfilename#getname()
     let s:prev_win=win_getid()
-    if filereadable(s:in)
-        call delete(s:in)
-    endif
-    if filereadable(s:out)
-        call delete(s:out)
-    endif
+    "if filereadable(s:in)
+    "    call delete(s:in)
+    "endif
+    "if filereadable(s:out)
+    "    call delete(s:out)
+    "endif
     call writefile(split(@*,"\n"),s:in)
     silent! execute 'python' . (has('python3') ? '3' : '') . ' zone_deal_tconnd_pkg_to_cmd("'.s:in.'","'.s:out.'","'.s:cscmd_path.'")'
     call win_gotoid(s:prev_win)

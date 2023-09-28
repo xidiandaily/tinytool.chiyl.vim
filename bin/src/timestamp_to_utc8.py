@@ -11,6 +11,8 @@ import pdb
 import datetime
 import pytz
 import fileinput
+import chardet
+import json
 
 sys.path.append("../pythonlib")
 
@@ -36,9 +38,17 @@ def read_file(strFileName):
         strCon=fileObj.read()
     return strCon
 
+def open_file(filename,mode):
+    with open(filename,mode+'b') as f:
+        rawdata=f.read()
+        result=chardet.detect(rawdata)
+        encoding=result['encoding']
+        return open(filename,mode,encoding=encoding)
+
 def timestamp_to_utc8(_in,_out):
     all_out=[]
-    for line in fileinput.FileInput(_in):
+    for line in fileinput.FileInput(files=_in,openhook=open_file):
+        line=line.replace('\n','')
         out=[]
         for num in re.split(r'[^0-9]',line):
             if len(num) not in [10,13]:
@@ -52,12 +62,12 @@ def timestamp_to_utc8(_in,_out):
             except:
                 out.append("{}: null".format(num,str_utc8))
         if len(out):
-            all_out.append(',   '.join(out))
+            all_out.append('{}   ###timestamp:{}'.format(line,json.dumps(out)))
         else:
-            all_out.append('null')
+            all_out.append(line)
 
     with open(_out,'w') as fileObj:
-        fileObj.write("\n".join(all_out))
+        fileObj.write('\n'.join(all_out))
 
 _VER="1.0.0"
 logfilename=os.path.splitext(sys.argv[0])[0]+".log"
@@ -94,7 +104,7 @@ if not args.infile or not args.outfile:
     sys.exit()
 
 timestamp_to_utc8(args.infile,args.outfile)
-#in_path="D:/GitBase/myLGameTools2/.vimtmp.in.timestamp_to_utc8"
-#out_path="D:/GitBase/myLGameTools2/.vimtmp.out.timestamp_to_utc8"
+#in_path="G:/CodeBase.p4/release_4.4.0.Server_proj/.vimtmp.in.timestamp_to_utc8"
+#out_path="G:/CodeBase.p4/release_4.4.0.Server_proj/.vimtmp.out.timestamp_to_utc8"
 #timestamp_to_utc8(in_path,out_path)
 

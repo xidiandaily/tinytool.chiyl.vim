@@ -31,7 +31,8 @@ function! tinytoolchiyl#base#touch_files_in_clipboard#doit()
         call add(updated_files,"剪切板中找不到需要更新最近修改时间的文件")
     endif
 
-    let outfile = ".vimtmp.out.touch_files_in_clipboard"
+    "let outfile = ".vimtmp.out.touch_files_in_clipboard"
+    let outfile=tinytoolchiyl#base#gettmploopfilename#getname()
     call writefile(updated_files,outfile)
     call ctrlp#mybase#ctrlp_open_new_win(outfile,1)
 endfunction

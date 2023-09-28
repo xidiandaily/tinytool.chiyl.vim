@@ -7,15 +7,17 @@
 "==============================================================================
 
 function! tinytoolchiyl#base#asyncstr_to_info#doit()
-    let s:in='.vimtmp.in.asyncstr_to_info'
-    let s:out='.vimtmp.out.asyncstr_to_info'
+    "let s:in='.vimtmp.in.asyncstr_to_info'
+    "let s:out='.vimtmp.out.asyncstr_to_info'
+    let s:in=tinytoolchiyl#base#gettmploopfilename#getname()
+    let s:out=tinytoolchiyl#base#gettmploopfilename#getname()
     let s:prev_win=win_getid()
-    if filereadable(s:in)
-        call delete(s:in)
-    endif
-    if filereadable(s:out)
-        call delete(s:out)
-    endif
+    "if filereadable(s:in)
+    "    call delete(s:in)
+    "endif
+    "if filereadable(s:out)
+    "    call delete(s:out)
+    "endif
     call writefile(split(@*,"\n"),s:in)
     silent! execute 'python' . (has('python3') ? '3' : '') . ' asyncstr_to_info("'.s:in.'","'.s:out.'")'
     call win_gotoid(s:prev_win)

@@ -10,6 +10,8 @@ lgamesvr_header_dirs_realpath=set([
     #"G:/CodeBase.github/vim/VIMPROJ/vimlib/linux/include",
     "\"C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/Common7/IDE/VC/Linux/include/usr/include\"",
     "\"C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/Common7/IDE/VC/Linux/include/usr/include/x86_64-linux-gnu\"",
+    "\"E:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/VC/Linux/include/usr/include\"",
+    "\"E:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/VC/Linux/include/usr/include/x86_64-linux-gnu\"",
     ])
 
 lgamesvr_header_dirs=set([
@@ -264,7 +266,8 @@ def directory_to_compile_commands_file(dir_path,_out):
                 source_files.append(os.path.relpath(os.path.realpath(os.path.join(dirpath,name)),dir_path).replace('\\','/'))
     str_include=""
     for dirname in lgamesvr_header_dirs_realpath:
-        str_include+=" -I{}".format(dirname)
+        if os.path.isdir(dirname.replace('/','\\').replace('"','')):
+            str_include+=" -I{}".format(dirname)
 
     for dirname in lgamesvr_header_dirs:
         str_include+=" -I{}".format(os.path.realpath(os.path.join(dir_path,dirname)).replace("\\","/"))

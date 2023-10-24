@@ -85,5 +85,30 @@ if has('gui_running')
 
         anoremenu <silent> PopUp.T&inytool.open_with_notepad++
                     \ :silent !cmd.exe /c start  "notepad++" "%" <CR>
+
+        anoremenu <silent> PopUp.T&inytool.open_current_file_dir
+                    \ :silent !cmd.exe /c start  "" "%:p:h" <CR>
+
+        anoremenu <silent> PopUp.T&inytool.open_dir_with_conemu
+                    \ :silent !cmd.exe /c start  ConEmu64 -Dir "%:p:h" <CR>
     endif
 endif
+
+#窗口间快速跳转标记位置
+command! -nargs=1 WinGotoMark call tinytoolchiyl#base#goto_marks_switch_win#doit(<q-args>)
+for mark in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    execute "nnoremap <Leader>W" . mark . " :WinGotoMark " . mark . "<CR>"
+endfor
+
+" 初始化全局变量
+let g:tinytool_chiyl_last_postion = [0, 0, 0, 0]
+" 创建自动命令组
+augroup TinyToolUpdateLastPosition
+    " 清除可能已存在的自动命令
+    autocmd!
+
+    " 每次光标移动时，将当前位置存储在 g:last_position 变量中
+    autocmd InsertLeave * let curpos = getpos('.') | let curbufnr=bufnr('%') | let g:tinytool_chiyl_last_postion=[curbufnr]+curpos[1:]
+augroup END
+
+nnoremap <Leader>WW :call tinytoolchiyl#base#goto_marks_switch_win#last_edit_pos()<CR>

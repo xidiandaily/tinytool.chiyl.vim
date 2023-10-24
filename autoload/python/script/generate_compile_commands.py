@@ -213,7 +213,8 @@ lgamesvr_header_dirs=set([
 compile_flags=set([
     "-Wno-incompatible-pointer-types-discards-qualifiers",
     "-Wno-implicit-function-declaration",
-    "-Wno-reserved-user-defined-literal"
+    "-Wno-reserved-user-defined-literal",
+    "-Wno-incompatible-function-pointer-types"
     ])
 
 #{

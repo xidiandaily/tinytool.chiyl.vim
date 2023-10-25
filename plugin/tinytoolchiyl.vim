@@ -94,7 +94,7 @@ if has('gui_running')
     endif
 endif
 
-#窗口间快速跳转标记位置
+"窗口间快速跳转标记位置
 command! -nargs=1 WinGotoMark call tinytoolchiyl#base#goto_marks_switch_win#doit(<q-args>)
 for mark in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     execute "nnoremap <Leader>W" . mark . " :WinGotoMark " . mark . "<CR>"

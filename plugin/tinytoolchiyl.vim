@@ -92,8 +92,11 @@ if has('gui_running')
         anoremenu <silent> PopUp.T&inytool.select_hex_to_dec
                     \ :call tinytoolchiyl#base#hexToDec#SelectHexToDec()<CR>
 
-        anoremenu <silent> PopUp.T&inytool.touch_files_in_clipboard
-                    \ :call tinytoolchiyl#base#touch_files_in_clipboard#doit()<CR>
+        "anoremenu <silent> PopUp.T&inytool.touch_files_in_clipboard
+        "            \ :call tinytoolchiyl#base#touch_files_in_clipboard#doit()<CR>
+        
+        anoremenu <silent> PopUp.T&inytool.find_no_use_asyncid
+                    \ :call tinytoolchiyl#base#find_no_use_asyncid#doit()<CR>
           
         anoremenu <silent> PopUp.T&inytool.lgamesvr_compile_commands_for_lsp
                     \ : call tinytoolchiyl#base#lgamesvr_compile_commands_for_lsp#doit()<CR>

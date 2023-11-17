@@ -67,6 +67,34 @@ def asynid_to_info(asyncid):
     except:
         return ret
 
+def find_no_use_asyncid(filename):
+    ret = []
+    try:
+        filepath='framework/async_type_def.h'
+
+        asyncidlist=[]
+        with open(filepath,mode='r',encoding='utf-8') as fileObj:
+            for line in fileObj:
+                line=line.strip()
+                pattern = r'#define\s+([A-Z0-9_]+)\s+(\d+)\s*(\/\/\s*(.*))?'
+                match = re.search(pattern,line)
+                if match:
+                    myid=int(match.group(2))
+                    asyncidlist.append(myid)
+
+        #ASYNC_TYPE_MAX (2000)
+        for i in range(1,2000):
+            if i not in asyncidlist:
+                ret.append("{}".format(i))
+    except:
+        pass
+
+    sorted(ret)
+    for i in ret:
+        print(i)
+    with open(filename,'w') as fileObj:
+        fileObj.write('\n'.join(ret))
+
 def asyncstr_to_ulong(str_list):
     if len(str_list) >= 4:
         ty = int(str_list[0])

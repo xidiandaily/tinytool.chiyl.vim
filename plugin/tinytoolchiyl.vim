@@ -71,6 +71,9 @@ if has('gui_running')
         anoremenu <silent> PopUp.T&inytool.tarfile.SetTstamp
                     \ :call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),3)<CR>
 
+        anoremenu <silent> PopUp.T&inytool.tarfile.P4opened
+                    \ :call tinytoolchiyl#base#find_modified_files#tar_p4_opened_files()<CR>
+
         anoremenu <silent> PopUp.T&inytool.tarfile.Clean
                     \ :call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),4)<CR>
 

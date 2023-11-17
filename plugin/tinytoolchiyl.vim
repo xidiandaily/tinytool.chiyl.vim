@@ -62,6 +62,27 @@ if has('gui_running')
         anoremenu <silent> PopUp.T&inytool.tlog.tlog_to_json_on_lgamesvr
                     \ :call tinytoolchiyl#base#tlog_to_json_on_lgamesvr#Doit()<CR>
 
+        anoremenu <silent> PopUp.T&inytool.tarfile.modify
+                    \ :call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),1)<CR>
+
+        anoremenu <silent> PopUp.T&inytool.tarfile.All
+                    \ :call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),2)<CR>
+
+        anoremenu <silent> PopUp.T&inytool.tarfile.SetTstamp
+                    \ :call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),3)<CR>
+
+        anoremenu <silent> PopUp.T&inytool.tarfile.Clean
+                    \ :call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),4)<CR>
+
+        anoremenu <silent> PopUp.T&inytool.open.Notepad++
+                    \ :silent !cmd.exe /c start  "notepad++" "%" <CR>
+
+        anoremenu <silent> PopUp.T&inytool.open.FileDir
+                    \ :silent !cmd.exe /c start  "" "%:p:h" <CR>
+
+        anoremenu <silent> PopUp.T&inytool.open.ConEmu
+                    \ :silent !cmd.exe /c start  ConEmu64 -Dir "%:p:h" <CR>
+
         anoremenu <silent> PopUp.T&inytool.select_hex_to_dec
                     \ :call tinytoolchiyl#base#hexToDec#SelectHexToDec()<CR>
 
@@ -82,15 +103,6 @@ if has('gui_running')
 
         anoremenu <silent> PopUp.T&inytool.sort_uniq
                     \ :'<,'>sort u<CR> :echom "sort u" <CR>
-
-        anoremenu <silent> PopUp.T&inytool.open_with_notepad++
-                    \ :silent !cmd.exe /c start  "notepad++" "%" <CR>
-
-        anoremenu <silent> PopUp.T&inytool.open_current_file_dir
-                    \ :silent !cmd.exe /c start  "" "%:p:h" <CR>
-
-        anoremenu <silent> PopUp.T&inytool.open_dir_with_conemu
-                    \ :silent !cmd.exe /c start  ConEmu64 -Dir "%:p:h" <CR>
     endif
 endif
 

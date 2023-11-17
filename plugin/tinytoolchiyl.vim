@@ -83,6 +83,9 @@ if has('gui_running')
         anoremenu <silent> PopUp.T&inytool.open.ConEmu
                     \ :silent !cmd.exe /c start  ConEmu64 -Dir "%:p:h" <CR>
 
+        anoremenu <silent> PopUp.T&inytool.open.Cygwin
+                    \ :call tinytoolchiyl#base#openwith#Cygwin()<CR>
+
         anoremenu <silent> PopUp.T&inytool.select_hex_to_dec
                     \ :call tinytoolchiyl#base#hexToDec#SelectHexToDec()<CR>
 

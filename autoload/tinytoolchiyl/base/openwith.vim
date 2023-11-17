@@ -8,6 +8,7 @@
 
 function! tinytoolchiyl#base#openwith#Cygwin()
     :let cygwin_path = substitute(substitute(expand('%:p:h'), '\([A-Za-z]\):\\', '/cygdrive/\L\1/', ''),'\\','/','g')
-    :silent !cmd.exe /c start mintty.exe /bin/env CHERE_INVOKING=1 /bin/bash --login -c "exec /bin/bash"
+    ":silent !cmd.exe /c start mintty.exe /bin/env CHERE_INVOKING=1 /bin/bash --login -c "exec /bin/bash"
+    :let cygwin_path = substitute(expand('%:p:h'), '\([A-Za-z]\):\\', '/cygdrive/\L\1/', '') | execute '!start mintty.exe /bin/env CHERE_INVOKING=1 /bin/bash --login -c "cd ''' . cygwin_path . '''; exec /bin/bash"'
 endfunction
 

@@ -38,3 +38,47 @@ function! tinytoolchiyl#base#mydatetime#timestamp_to_utc8()
     "endif
 endfunction
 
+function! tinytoolchiyl#base#mydatetime#do_get_timestamp()
+python3 << EOF
+import vim
+import time
+
+current_timestamp = int(time.time())
+vim.command("let @* = {}".format(current_timestamp))
+EOF
+endfunction
+
+function! tinytoolchiyl#base#mydatetime#copy_timestamp()
+    call tinytoolchiyl#base#mydatetime#do_get_timestamp()
+    :echom "copy to @*:"@*
+endfunction
+
+function! tinytoolchiyl#base#mydatetime#copy_1_hour_agotimestamp()
+    call tinytoolchiyl#base#mydatetime#do_get_timestamp()
+    let @*=@*-60*60
+    :echom "copy to @*:"@*
+endfunction
+
+function! tinytoolchiyl#base#mydatetime#copy_1_day_agotimestamp()
+    call tinytoolchiyl#base#mydatetime#do_get_timestamp()
+    let @*=@*-24*60*60
+    :echom "copy to @*:"@*
+endfunction
+
+function! tinytoolchiyl#base#mydatetime#copy_1_week_agotimestamp()
+    call tinytoolchiyl#base#mydatetime#do_get_timestamp()
+    let @*=@*-7*24*60*60
+    :echom "copy to @*:"@*
+endfunction
+
+function! tinytoolchiyl#base#mydatetime#copy_1_month_agotimestamp()
+    call tinytoolchiyl#base#mydatetime#do_get_timestamp()
+    let @*=@*-30*24*60*60
+    :echom "copy to @*:"@*
+endfunction
+
+function! tinytoolchiyl#base#mydatetime#copy_str_time()
+    let @*=strftime('%Y_%m_%d_%H_%M_%S')
+    :echom "copy to @*:".@*
+endfunction
+

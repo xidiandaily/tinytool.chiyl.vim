@@ -41,17 +41,17 @@ if has('gui_running')
         anoremenu <silent> PopUp.T&inytool.p4.revert_all_files
                     \ :call ctrlp#myp4#P4RevertAll()<CR><CR>
 
+        anoremenu <silent> PopUp.T&inytool.p4.xml2header
+                    \ :call ctrlp#mycmd#Xml2Header()<CR><CR>
+
+        anoremenu <silent> PopUp.T&inytool.p4.cleanxmlheader
+                    \ :call ctrlp#mycmd#DelProCfiles()<CR><CR>
+
         anoremenu <silent> PopUp.T&inytool.log.zone_deal_tconnd_pkg_to_cmd
                     \ : call tinytoolchiyl#base#zone_deal_tconnd_pkg_to_cmd#doit()<CR>
 
         anoremenu <silent> PopUp.T&inytool.log.zone_send_to_client_cs_msg
                     \ : call tinytoolchiyl#base#zone_send_to_client_cs_msg#doit()<CR>
-
-        anoremenu <silent> PopUp.T&inytool.log.asyncstr_to_info
-                    \ : call tinytoolchiyl#base#asyncstr_to_info#doit()<CR>
-
-        anoremenu <silent> PopUp.T&inytool.log.asyncid_to_info
-                    \ : call tinytoolchiyl#base#asyncid_to_info#doit()<CR>
 
         anoremenu <silent> PopUp.T&inytool.tlog.csv_to_json_on_lgamesvr
                   \ :call tinytoolchiyl#base#csv_to_json_on_lgamesvr#SelectStructToPandasDtype()<CR>
@@ -89,6 +89,45 @@ if has('gui_running')
         anoremenu <silent> PopUp.T&inytool.open.Cygwin
                     \ :call tinytoolchiyl#base#openwith#Cygwin()<CR>
 
+        anoremenu <silent> PopUp.T&inytool.parseinfo.tbus_info_intid
+                    \ :call tinytoolchiyl#base#businfo#intid()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.parseinfo.tbus_info_strid
+                    \ :call tinytoolchiyl#base#businfo#strid()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.parseinfo.tbus_info_typeid
+                    \ :call tinytoolchiyl#base#businfo#typeid()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.parseinfo.asyncid_to_info
+                    \ : call tinytoolchiyl#base#asyncid_to_info#doit()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.parseinfo.asyncstr_to_info
+                    \ : call tinytoolchiyl#base#asyncstr_to_info#doit()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.parseinfo.uin_info
+                    \ : call tinytoolchiyl#base#uin_info#doit()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.time.timestamp_to_utc8
+                    \ :call tinytoolchiyl#base#mydatetime#timestamp_to_utc8()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.time.copy_timestamp
+                    \ :call tinytoolchiyl#base#mydatetime#copy_timestamp()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.time.copy_1_hour_ago_timestamp
+                    \ :call tinytoolchiyl#base#mydatetime#copy_1_hour_agotimestamp()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.time.copy_1_day_ago_timestamp
+                    \ :call tinytoolchiyl#base#mydatetime#copy_1_day_agotimestamp()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.time.copy_1_week_ago_timestamp
+                    \ :call tinytoolchiyl#base#mydatetime#copy_1_week_agotimestamp()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.time.copy_1_month_ago_timestamp
+                    \ :call tinytoolchiyl#base#mydatetime#copy_1_month_agotimestamp()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.time.copy_str_time
+                    \ :call tinytoolchiyl#base#mydatetime#copy_str_time()<CR>
+
         anoremenu <silent> PopUp.T&inytool.select_hex_to_dec
                     \ :call tinytoolchiyl#base#hexToDec#SelectHexToDec()<CR>
 
@@ -103,12 +142,6 @@ if has('gui_running')
 
         anoremenu <silent> PopUp.T&inytool.clean_all_vimtmpfile
                     \ : call tinytoolchiyl#base#gettmploopfilename#clean_all_vimtmpfile()<CR>
-
-        anoremenu <silent> PopUp.T&inytool.timestamp_to_utc8
-                    \ :call tinytoolchiyl#base#mydatetime#timestamp_to_utc8()<CR>
-
-        anoremenu <silent> PopUp.T&inytool.uin_info
-                    \ :call tinytoolchiyl#base#uin_info#doit()<CR>
 
         anoremenu <silent> PopUp.T&inytool.sort_uniq
                     \ :'<,'>sort u<CR> :echom "sort u" <CR>

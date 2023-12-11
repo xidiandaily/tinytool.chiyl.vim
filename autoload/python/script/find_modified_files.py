@@ -88,6 +88,8 @@ def find_modified_files(path, choice):
         with tarfile.open(tarfullname, "w") as tar:
             for match in matches:
                 tar.add(match, arcname=os.path.relpath(match, path))
+        print(" ")
+        print(" ")
         print("Tar file created with matching files: {}".format(tarfullname))
         with open(last_update_file,"w") as myfile:
             myfile.write("0")

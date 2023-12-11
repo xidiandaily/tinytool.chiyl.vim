@@ -67,6 +67,22 @@ def asynid_to_info(asyncid):
     except:
         return ret
 
+def busid_to_info(busid):
+    ret = {'name':'NONE','desc':'未知命令','busid':busid}
+    try:
+        macro_xml='protocol/star_macro.xml'
+        #macro_xml='G:/CodeBase.p4/trunkmain.Server_proj/protocol/star_macro.xml'
+        root = ET.parse(macro_xml).getroot()
+        e = root.find(".//macrosgroup[@name='ENUM_FUNC']").find("./macro[@value='{}']".format(busid))
+        if e is None:
+            return ret
+
+        ret['name']=e.get('name')
+        ret['desc']=e.get('desc')
+        return ret
+    except:
+        return ret
+
 def find_no_use_asyncid(filename):
     ret = []
     try:

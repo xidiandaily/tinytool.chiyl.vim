@@ -9,7 +9,7 @@ import vim
 from datetime import datetime
 
 max_tar_file_num=150
-def find_modified_files(path, choice):
+def find_modified_files(path, choice,iszip):
     global max_tar_file_num
     ignore_list = ['*/.git*',
                    '*/.svn*',
@@ -24,9 +24,13 @@ def find_modified_files(path, choice):
                    'lgamexml.ctrlptags',
                    'lgamexml.tags',
                    'tags']
+    #print("choice:{},iszip:{}".format(choice,iszip))
     last_update_file= os.path.join(path,".last_modify_file")
     tarname = os.path.basename(path)
-    tarfullname = os.path.realpath(os.path.join(os.path.join(path,'..'),'{}.tar'.format(tarname)))
+    if int(iszip) == 1:
+        tarfullname = os.path.realpath(os.path.join(os.path.join(path,'..'),'{}.zip'.format(tarname)))
+    else:
+        tarfullname = os.path.realpath(os.path.join(os.path.join(path,'..'),'{}.tar'.format(tarname)))
     if int(choice) == 4:
         if os.path.exists(last_update_file):
             os.remove(last_update_file)
@@ -85,9 +89,15 @@ def find_modified_files(path, choice):
             return
 
     if matches:
-        with tarfile.open(tarfullname, "w") as tar:
+        if int(iszip) == 1:
+            file_list=[]
             for match in matches:
-                tar.add(match, arcname=os.path.relpath(match, path))
+                file_list.append(os.path.relpath(match, path))
+            myutil.compress_files(file_list,tarfullname)
+        else:
+            with tarfile.open(tarfullname, "w") as tar:
+                for match in matches:
+                    tar.add(match, arcname=os.path.relpath(match, path))
         print(" ")
         print(" ")
         print("Tar file created with matching files: {}".format(tarfullname))

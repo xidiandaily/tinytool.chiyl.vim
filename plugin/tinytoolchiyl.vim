@@ -63,19 +63,22 @@ if has('gui_running')
                     \ :call tinytoolchiyl#base#tlog_to_json_on_lgamesvr#Doit()<CR>
 
         anoremenu <silent> PopUp.T&inytool.tarfile.modify
-                    \ :call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),1)<CR>
+                    \ :call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),1,0)<CR>
 
         anoremenu <silent> PopUp.T&inytool.tarfile.All
-                    \ :call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),2)<CR>
+                    \ :call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),2,0)<CR>
+
+        anoremenu <silent> PopUp.T&inytool.tarfile.ZIPAll
+                    \ :call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),2,1)<CR>
 
         anoremenu <silent> PopUp.T&inytool.tarfile.SetTstamp
-                    \ :call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),3)<CR>
+                    \ :call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),3,0)<CR>
 
         anoremenu <silent> PopUp.T&inytool.tarfile.P4opened
                     \ :call tinytoolchiyl#base#find_modified_files#tar_p4_opened_files()<CR>
 
         anoremenu <silent> PopUp.T&inytool.tarfile.Clean
-                    \ :call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),4)<CR>
+                    \ :call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),4,0)<CR>
 
         anoremenu <silent> PopUp.T&inytool.open.Notepad++
                     \ :silent !cmd.exe /c start  "notepad++" "%" <CR>
@@ -128,18 +131,30 @@ if has('gui_running')
         anoremenu <silent> PopUp.T&inytool.time.copy_str_time
                     \ :call tinytoolchiyl#base#mydatetime#copy_str_time()<CR>
 
+        anoremenu <silent> PopUp.T&inytool.env.lgamesvr_compile_commands_for_lsp
+                    \ : call tinytoolchiyl#base#lgamesvr_compile_commands_for_lsp#doit()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.env.lgamesvr_grep_ignored_filelist
+                    \ : call tinytoolchiyl#base#lgamesvr_compile_commands_for_lsp#grep_ignore_files()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.env.find_no_use_asyncid
+                    \ :call tinytoolchiyl#base#find_no_use_asyncid#doit()<CR>
+          
+        anoremenu <silent> PopUp.T&inytool.env.find_no_use_csmsgid
+                    \ :call tinytoolchiyl#base#find_no_use_asyncid#csmsgid()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.env.find_no_use_ssmsgid
+                    \ :call tinytoolchiyl#base#find_no_use_asyncid#ssmsgid()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.env.update_xml_to_lua
+                    \ :!start cmd.exe /c "cd /d D:/GitBase/myLGameTools/proto2lua/dist/ && proto2lua.exe -i G:/CodeBase.p4/main.testclient.Server_proj/protocol -o G:/CodeBase.p4/main.testclient.Server_proj/tools/testclient/script/doc"<CR>
+
         anoremenu <silent> PopUp.T&inytool.select_hex_to_dec
                     \ :call tinytoolchiyl#base#hexToDec#SelectHexToDec()<CR>
 
         "anoremenu <silent> PopUp.T&inytool.touch_files_in_clipboard
         "            \ :call tinytoolchiyl#base#touch_files_in_clipboard#doit()<CR>
         
-        anoremenu <silent> PopUp.T&inytool.find_no_use_asyncid
-                    \ :call tinytoolchiyl#base#find_no_use_asyncid#doit()<CR>
-          
-        anoremenu <silent> PopUp.T&inytool.lgamesvr_compile_commands_for_lsp
-                    \ : call tinytoolchiyl#base#lgamesvr_compile_commands_for_lsp#doit()<CR>
-
         anoremenu <silent> PopUp.T&inytool.clean_all_vimtmpfile
                     \ : call tinytoolchiyl#base#gettmploopfilename#clean_all_vimtmpfile()<CR>
 

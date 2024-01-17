@@ -13,3 +13,8 @@ function! tinytoolchiyl#base#lgamesvr_compile_commands_for_lsp#doit()
     silent! execute 'python' . (has('python3') ? '3' : '') . ' directory_to_compile_commands_file("'.s:in.'","'.s:out.'")'
     call ctrlp#mybase#ctrlp_open_new_win(s:out,1)
 endfunction
+
+function! tinytoolchiyl#base#lgamesvr_compile_commands_for_lsp#grep_ignore_files()
+    let s:out='.agignore'
+    call ctrlp#mybase#ctrlp_open_new_win(s:out,1)
+endfunction

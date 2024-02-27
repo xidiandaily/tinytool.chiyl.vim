@@ -6,21 +6,6 @@
 " Version:     1.0.0
 "==============================================================================
 
-function! s:GetSelectedText() abort
-    let [lnum1, col1] = getpos("'<")[1:2]
-    let [lnum2, col2] = getpos("'>")[1:2]
-    let lines = getline(lnum1, lnum2)
-    if len(lines) == 0
-        return ''
-    elseif len(lines) == 1
-        return lines[0][col1 - 1 : col2 - 1]
-    else
-        let lines[0] = lines[0][col1 - 1 :]
-        let lines[-1] = lines[-1][: col2 - 2]
-    endif
-    return join(lines, "\n")
-endfunction
-
 " 将十六进制数字转成10进制数字
 function! tinytoolchiyl#base#hexToDec#SelectHexToDec()
     let sel = s:GetSelectedText()

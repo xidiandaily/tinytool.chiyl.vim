@@ -26,41 +26,23 @@ endfor
 "一些默认配置
 if has('gui_running')
     if &mousemodel =~? 'popup'
-        anoremenu <silent> PopUp.T&inytool.p4.edit_all_protocol_files
-                    \ :call ctrlp#myp4#P4Protocol()<CR><CR>:call ctrlp#myp4#P4Opened()<CR><CR>
+        anoremenu <silent> PopUp.T&inytool.git.pull
+                    \ :call ctrlp#mygit#pull()<CR><CR>
 
-        anoremenu <silent> PopUp.T&inytool.p4.edit_all_lua_doc_files
-                    \ :call tinytoolchiyl#base#p4#P4EditAllLuaDocFiles()<CR><CR>
+        anoremenu <silent> PopUp.T&inytool.git.guilog
+                    \ :call ctrlp#mygit#guilog()<CR>
 
-        anoremenu <silent> PopUp.T&inytool.p4.edit_all_idip_protocol_files
-                    \ :call tinytoolchiyl#base#p4#P4EditAllIdipFiles()<CR><CR>
+        anoremenu <silent> PopUp.T&inytool.git.guifilelog
+                    \ :call ctrlp#mygit#guifilelog()<CR>
 
-        anoremenu <silent> PopUp.T&inytool.p4.targz_all_idip_protocol_files
-                    \ :call tinytoolchiyl#base#p4#tar_gz_all_idip_protocol_files()<CR><CR>
+        anoremenu <silent> PopUp.T&inytool.git.guiblame
+                    \ :call ctrlp#mygit#guiblame()<CR>
 
-        anoremenu <silent> PopUp.T&inytool.p4.revert_all_files
-                    \ :call ctrlp#myp4#P4RevertAll()<CR><CR>
+        anoremenu <silent> PopUp.T&inytool.git.commit
+                    \ :call ctrlp#mygit#guicommit()<CR>
 
-        anoremenu <silent> PopUp.T&inytool.p4.xml2header
-                    \ :call ctrlp#mycmd#Xml2Header()<CR><CR>
-
-        anoremenu <silent> PopUp.T&inytool.p4.cleanxmlheader
-                    \ :call ctrlp#mycmd#DelProCfiles()<CR><CR>
-
-        anoremenu <silent> PopUp.T&inytool.log.zone_deal_tconnd_pkg_to_cmd
-                    \ : call tinytoolchiyl#base#zone_deal_tconnd_pkg_to_cmd#doit()<CR>
-
-        anoremenu <silent> PopUp.T&inytool.log.zone_send_to_client_cs_msg
-                    \ : call tinytoolchiyl#base#zone_send_to_client_cs_msg#doit()<CR>
-
-        anoremenu <silent> PopUp.T&inytool.tlog.csv_to_json_on_lgamesvr
-                  \ :call tinytoolchiyl#base#csv_to_json_on_lgamesvr#SelectStructToPandasDtype()<CR>
-
-        anoremenu <silent> PopUp.T&inytool.tlog.tlog_struct_to_pandas_dtype
-                    \ :call tinytoolchiyl#base#tlog_struct_to_pandas_dtype#SelectStructToPandasDtype()<CR>
-
-        anoremenu <silent> PopUp.T&inytool.tlog.tlog_to_json_on_lgamesvr
-                    \ :call tinytoolchiyl#base#tlog_to_json_on_lgamesvr#Doit()<CR>
+        anoremenu <silent> PopUp.T&inytool.git.show_select_commit
+                    \ :call ctrlp#mygit#show_commit_detail()<CR>
 
         anoremenu <silent> PopUp.T&inytool.tarfile.modify
                     \ :call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),1,0)<CR>
@@ -92,24 +74,6 @@ if has('gui_running')
         anoremenu <silent> PopUp.T&inytool.open.Cygwin
                     \ :call tinytoolchiyl#base#openwith#Cygwin()<CR>
 
-        anoremenu <silent> PopUp.T&inytool.parseinfo.tbus_info_intid
-                    \ :call tinytoolchiyl#base#businfo#intid()<CR>
-
-        anoremenu <silent> PopUp.T&inytool.parseinfo.tbus_info_strid
-                    \ :call tinytoolchiyl#base#businfo#strid()<CR>
-
-        anoremenu <silent> PopUp.T&inytool.parseinfo.tbus_info_typeid
-                    \ :call tinytoolchiyl#base#businfo#typeid()<CR>
-
-        anoremenu <silent> PopUp.T&inytool.parseinfo.asyncid_to_info
-                    \ : call tinytoolchiyl#base#asyncid_to_info#doit()<CR>
-
-        anoremenu <silent> PopUp.T&inytool.parseinfo.asyncstr_to_info
-                    \ : call tinytoolchiyl#base#asyncstr_to_info#doit()<CR>
-
-        anoremenu <silent> PopUp.T&inytool.parseinfo.uin_info
-                    \ : call tinytoolchiyl#base#uin_info#doit()<CR>
-
         anoremenu <silent> PopUp.T&inytool.time.timestamp_to_utc8
                     \ :call tinytoolchiyl#base#mydatetime#timestamp_to_utc8()<CR>
 
@@ -131,23 +95,11 @@ if has('gui_running')
         anoremenu <silent> PopUp.T&inytool.time.copy_str_time
                     \ :call tinytoolchiyl#base#mydatetime#copy_str_time()<CR>
 
-        anoremenu <silent> PopUp.T&inytool.env.lgamesvr_compile_commands_for_lsp
-                    \ : call tinytoolchiyl#base#lgamesvr_compile_commands_for_lsp#doit()<CR>
+        anoremenu <silent> PopUp.T&inytool.env.pgamesvr_lsp_setting
+                    \ : call tinytoolchiyl#base#lsp_setting#pgamesvr()<CR>
 
-        anoremenu <silent> PopUp.T&inytool.env.lgamesvr_grep_ignored_filelist
-                    \ : call tinytoolchiyl#base#lgamesvr_compile_commands_for_lsp#grep_ignore_files()<CR>
-
-        anoremenu <silent> PopUp.T&inytool.env.find_no_use_asyncid
-                    \ :call tinytoolchiyl#base#find_no_use_asyncid#doit()<CR>
-          
-        anoremenu <silent> PopUp.T&inytool.env.find_no_use_csmsgid
-                    \ :call tinytoolchiyl#base#find_no_use_asyncid#csmsgid()<CR>
-
-        anoremenu <silent> PopUp.T&inytool.env.find_no_use_ssmsgid
-                    \ :call tinytoolchiyl#base#find_no_use_asyncid#ssmsgid()<CR>
-
-        anoremenu <silent> PopUp.T&inytool.env.update_xml_to_lua
-                    \ :!start cmd.exe /c "cd /d D:/GitBase/myLGameTools/proto2lua/dist/ && proto2lua.exe -i G:/CodeBase.p4/main.testclient.Server_proj/protocol -o G:/CodeBase.p4/main.testclient.Server_proj/tools/testclient/script/doc"<CR>
+        anoremenu <silent> PopUp.T&inytool.env.add_ag_search_ignored_filelist
+                    \ : call tinytoolchiyl#base#myutil#add_ag_search_ignore_files()<CR>
 
         anoremenu <silent> PopUp.T&inytool.select_hex_to_dec
                     \ :call tinytoolchiyl#base#hexToDec#SelectHexToDec()<CR>
@@ -160,6 +112,74 @@ if has('gui_running')
 
         anoremenu <silent> PopUp.T&inytool.sort_uniq
                     \ :'<,'>sort u<CR> :echom "sort u" <CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.p4.edit_all_protocol_files
+                    \ :call ctrlp#myp4#P4Protocol()<CR><CR>:call ctrlp#myp4#P4Opened()<CR><CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.p4.edit_all_lua_doc_files
+                    \ :call tinytoolchiyl#base#p4#P4EditAllLuaDocFiles()<CR><CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.p4.edit_all_idip_protocol_files
+                    \ :call tinytoolchiyl#base#p4#P4EditAllIdipFiles()<CR><CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.p4.targz_all_idip_protocol_files
+                    \ :call tinytoolchiyl#base#p4#tar_gz_all_idip_protocol_files()<CR><CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.p4.revert_all_files
+                    \ :call ctrlp#myp4#P4RevertAll()<CR><CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.p4.xml2header
+                    \ :call ctrlp#mycmd#Xml2Header()<CR><CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.p4.cleanxmlheader
+                    \ :call ctrlp#mycmd#DelProCfiles()<CR><CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.log.zone_deal_tconnd_pkg_to_cmd
+                    \ : call tinytoolchiyl#base#zone_deal_tconnd_pkg_to_cmd#doit()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.log.zone_send_to_client_cs_msg
+                    \ : call tinytoolchiyl#base#zone_send_to_client_cs_msg#doit()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.tlog.csv_to_json_on_lgamesvr
+                  \ :call tinytoolchiyl#base#csv_to_json_on_lgamesvr#SelectStructToPandasDtype()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.tlog.tlog_struct_to_pandas_dtype
+                    \ :call tinytoolchiyl#base#tlog_struct_to_pandas_dtype#SelectStructToPandasDtype()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.tlog.tlog_to_json_on_lgamesvr
+                    \ :call tinytoolchiyl#base#tlog_to_json_on_lgamesvr#Doit()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.parseinfo.tbus_info_intid
+                    \ :call tinytoolchiyl#base#businfo#intid()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.parseinfo.tbus_info_strid
+                    \ :call tinytoolchiyl#base#businfo#strid()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.parseinfo.tbus_info_typeid
+                    \ :call tinytoolchiyl#base#businfo#typeid()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.parseinfo.asyncid_to_info
+                    \ : call tinytoolchiyl#base#asyncid_to_info#doit()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.parseinfo.asyncstr_to_info
+                    \ : call tinytoolchiyl#base#asyncstr_to_info#doit()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.parseinfo.uin_info
+                    \ : call tinytoolchiyl#base#uin_info#doit()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.env.lgamesvr_compile_commands_for_lsp
+                    \ : call tinytoolchiyl#base#lsp_setting#lgamesvr()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.env.find_no_use_asyncid
+                    \ :call tinytoolchiyl#base#find_no_use_asyncid#doit()<CR>
+          
+        anoremenu <silent> PopUp.T&inytool.lgame.env.find_no_use_csmsgid
+                    \ :call tinytoolchiyl#base#find_no_use_asyncid#csmsgid()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.lgame.env.find_no_use_ssmsgid
+                    \ :call tinytoolchiyl#base#find_no_use_asyncid#ssmsgid()<CR>
+        anoremenu <silent> PopUp.T&inytool.lgame.env.update_xml_to_lua
+                    \ :!start cmd.exe /c "cd /d D:/GitBase/myLGameTools/proto2lua/dist/ && proto2lua.exe -i G:/CodeBase.p4/main.testclient.Server_proj/protocol -o G:/CodeBase.p4/main.testclient.Server_proj/tools/testclient/script/doc"<CR>
     endif
 endif
 

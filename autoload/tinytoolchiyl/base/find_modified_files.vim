@@ -14,16 +14,22 @@ function! tinytoolchiyl#base#find_modified_files#tar_p4_opened_files()
     execute 'python' . (has('python3') ? '3' : '') . ' tar_p4_opened_files()'
 endfunction
 
+function! tinytoolchiyl#base#find_modified_files#tar_git_edited_files()
+    execute 'python' . (has('python3') ? '3' : '') . ' tar_git_edited_files()'
+endfunction
+
 
 function! tinytoolchiyl#base#find_modified_files#doit()
-    let choice=confirm("Upload file?", "&modefy\n&All\n&SetTstamp\n&Clean\n&P4Opended\n&ZIPAll\n&Cancel",1)
+    let choice=confirm("Upload file?", "&modefy\n&All\n&SetTstamp\n&Clean\n&GitEdited\n&P4Opended\n&ZIPAll\n&Cancel",1)
     let iszip=0
-    if choice == 7
+    if choice == 8
         return
     elseif choice == 5
+        call tinytoolchiyl#base#find_modified_files#tar_git_edited_files()
+    elseif choice == 6
         call tinytoolchiyl#base#find_modified_files#tar_p4_opened_files()
     else
-        if choice == 6
+        if choice == 7
             call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),2,1)
         else
             call tinytoolchiyl#base#find_modified_files#tarfiles(substitute(getcwd(),'\\','\\\\','g'),choice,iszip)

@@ -29,7 +29,7 @@ function! tinytoolchiyl#base#myutil#get_selected_text() abort
         return lines[0][col1 - 1 : col2 - 1]
     else
         let lines[0] = lines[0][col1 - 1 :]
-        let lines[-1] = lines[-1][: col2 - 2]
+        let lines[-1] = lines[-1][: col2 - 1]
     endif
     return join(lines, "\n")
 endfunction

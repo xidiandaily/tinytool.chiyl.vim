@@ -101,6 +101,18 @@ if has('gui_running')
         anoremenu <silent> PopUp.T&inytool.env.add_ag_search_ignored_filelist
                     \ : call tinytoolchiyl#base#myutil#add_ag_search_ignore_files()<CR>
 
+        anoremenu <silent> PopUp.T&inytool.pgame.busid_parse
+                    \ : call tinytoolchiyl#base#pgameinfo#busid_parse()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.pgame.add_debugline
+                    \ : call tinytoolchiyl#base#pgameinfo#add_debugline()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.select_xml_struct_to_markdowtable
+                    \ :call tinytoolchiyl#base#xml2markdowntable#pgame()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.select_lua_val_to_table
+                    \ :call tinytoolchiyl#base#lua_value_to_markdown_table#pgame()<CR>
+
         anoremenu <silent> PopUp.T&inytool.select_hex_to_dec
                     \ :call tinytoolchiyl#base#hexToDec#SelectHexToDec()<CR>
 
@@ -109,6 +121,9 @@ if has('gui_running')
         
         anoremenu <silent> PopUp.T&inytool.clean_all_vimtmpfile
                     \ : call tinytoolchiyl#base#gettmploopfilename#clean_all_vimtmpfile()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.mygrep
+                    \ : call confirm("执行自定义命令:Mygrep xxx 即可")<CR>
 
         anoremenu <silent> PopUp.T&inytool.sort_uniq
                     \ :'<,'>sort u<CR> :echom "sort u" <CR>
@@ -201,3 +216,20 @@ augroup TinyToolUpdateLastPosition
 augroup END
 
 nnoremap <Leader>WW :call tinytoolchiyl#base#goto_marks_switch_win#last_edit_pos()<CR>
+
+"创建自定义命令
+command! -nargs=1 Mygrep call tinytoolchiyl#base#mygrep#mygrep(<f-args>)
+
+" 添加自定义按钮
+:amenu ToolBar.-TinyToolOpen- :
+:amenu icon=tinytool_open_conemu.bmp ToolBar.Tinytool_Open_conemu :silent !cmd.exe /c start  ConEmu64 -Dir "%:p:h" <CR>
+:tmenu ToolBar.Tinytool_Open_conemu  打开ConEmu.exe并跳转至当前文件所在目录
+:amenu icon=tinytool_open_cygwin.bmp ToolBar.Tinytool_Open_cygwin :call tinytoolchiyl#base#openwith#Cygwin()<CR>
+:tmenu ToolBar.Tinytool_Open_cygwin  打开Cygwin.exe并跳转至当前文件所在目录
+:amenu icon=tinytool_open_folder.bmp ToolBar.Tinytool_Open_folder :silent !cmd.exe /c start  "" "%:p:h" <CR>
+:tmenu ToolBar.Tinytool_Open_folder  打开当前文件所在目录
+:amenu icon=tinytool_open_notepadplusplus.bmp ToolBar.Tinytool_Open_notepadplusplus :silent !cmd.exe /c start  "notepad++" "%" <CR>
+:tmenu ToolBar.Tinytool_Open_notepadplusplus  使用notepad++打开当前文件
+:amenu ToolBar.-TinyToolOther- :
+:amenu icon=tinytool_addline.bmp ToolBar.Tinytool_Addline :call tinytoolchiyl#base#pgameinfo#add_debugline()<CR>
+:tmenu ToolBar.Tinytool_Addline 给当前添加一个调试语句 log_info(...)

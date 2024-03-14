@@ -74,6 +74,9 @@ if has('gui_running')
         anoremenu <silent> PopUp.T&inytool.open.Cygwin
                     \ :call tinytoolchiyl#base#openwith#Cygwin()<CR>
 
+        anoremenu <silent> PopUp.T&inytool.open.git-bash
+                    \ :silent !cmd.exe /c start  git-bash<CR>
+
         anoremenu <silent> PopUp.T&inytool.time.timestamp_to_utc8
                     \ :call tinytoolchiyl#base#mydatetime#timestamp_to_utc8()<CR>
 
@@ -230,6 +233,11 @@ command! -nargs=1 Mygrep call tinytoolchiyl#base#mygrep#mygrep(<f-args>)
 :tmenu ToolBar.Tinytool_Open_folder  打开当前文件所在目录
 :amenu icon=tinytool_open_notepadplusplus.bmp ToolBar.Tinytool_Open_notepadplusplus :silent !cmd.exe /c start  "notepad++" "%" <CR>
 :tmenu ToolBar.Tinytool_Open_notepadplusplus  使用notepad++打开当前文件
+:amenu icon=tinytool_open_gitbash.bmp ToolBar.Tinytool_Open_gitbash :silent !cmd.exe /c start  git-bash<CR>
+:tmenu ToolBar.Tinytool_Open_gitbash  在当前目录打开Git-Bash
 :amenu ToolBar.-TinyToolOther- :
 :amenu icon=tinytool_addline.bmp ToolBar.Tinytool_Addline :call tinytoolchiyl#base#pgameinfo#add_debugline()<CR>
-:tmenu ToolBar.Tinytool_Addline 给当前添加一个调试语句 log_info(...)
+:tmenu ToolBar.Tinytool_Addline 给当前添加一个调试语句 log_info("chiyl debuginfo")
+:amenu icon=tinytool_logtree.bmp ToolBar.Tinytool_Logtree :call tinytoolchiyl#base#pgameinfo#add_log_tree()<CR>
+:tmenu ToolBar.Tinytool_Logtree 给当前添加一个调试语句 log_tree_info("chiyl debuginfo:")
+

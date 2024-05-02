@@ -24,6 +24,15 @@ def xml2markdowntable(input_file, output_file):
             }
             rows.append(row)
 
+        if 0 == len(rows):
+            headers = ['name', 'desc']
+            for macro in root.findall('macro'):
+                row = {
+                    'name': macro.attrib.get('name', ''),
+                    'desc': macro.attrib.get('desc', '')
+                }
+                rows.append(row)
+
         # 生成Markdown表格
         #table = "| " + " | ".join(headers) + " |\n"
         table = "| | "+root.attrib.get('name','') + " |\n"
@@ -42,45 +51,4 @@ def xml2markdowntable(input_file, output_file):
         pass
 
 ## 调用函数
-#xml2markdowntable('G:/CodeBase.pgame/pserver/.vimtmp.filename.16.txt', 'G:/CodeBase.pgame/pserver/.vimtmp.filename.17.txt')
-
-#def xml2markdowntable(input_file, output_file):
-#    # 从文件中读取XML数据
-#    root = ET.parse(input_file)
-#
-#    # 初始化输出字符串
-#    output = ""
-#
-#    # 遍历所有struct
-#    for struct in root.findall('struct'):
-#        struct_name = struct.attrib.get('name', '')
-#
-#        # 提取表格标题和内容
-#        headers = ['name', 'type', 'desc']
-#        rows = []
-#
-#        for entry in struct.findall('entry'):
-#            row = {
-#                'name': entry.attrib.get('name', ''),
-#                'type': entry.attrib.get('type', ''),
-#                'desc': entry.attrib.get('desc', '')
-#            }
-#            rows.append(row)
-#
-#        # 生成Markdown表格
-#        table = f"### {struct_name}\n\n"
-#        table += "| " + " | ".join(headers) + " |\n"
-#        table += "| " + " | ".join(['---' for _ in headers]) + " |\n"
-#
-#        for row in rows:
-#            table += "| " + " | ".join([row[header] for header in headers]) + " |\n"
-#
-#        # 将表格添加到输出字符串
-#        output += table + "\n\n"
-#
-#    # 将结果写入Markdown文件
-#    with open(output_file, 'w') as file:
-#        file.write(output)
-#
-## 调用函数
-#xml2markdowntable('G:/CodeBase.pgame/pserver/.vimtmp.filename.14.txt', 'G:/CodeBase.pgame/pserver/.vimtmp.filename.15.txt')
+#xml2markdowntable('G:/CodeBase.pgame/pserver/.vimtmp.filename.10.txt', 'G:/CodeBase.pgame/pserver/.vimtmp.filename.11.txt')

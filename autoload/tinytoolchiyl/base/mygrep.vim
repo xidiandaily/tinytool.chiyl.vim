@@ -11,6 +11,7 @@ function! tinytoolchiyl#base#mygrep#mygrep(pattern)
   let l:temp_config=substitute(expand("$VIMPROJ/../vimfiles/bundle/tinytool.chiyl.vim/config/ConEmu_for_mygrep.xml"),"\\","/",'g')
   let l:config=substitute(expand("$VIMPROJ/../vimfiles/bundle/tinytool.chiyl.vim/config/ConEmu_for_mygrep_cur.xml"),"\\","/",'g')
   let l:cmd="ag --nogroup --nocolor ".a:pattern
+  let @*=l:cmd
   "echom l:temp_config
   "echom l:config
   "echom l:cmd

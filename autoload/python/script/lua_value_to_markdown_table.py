@@ -15,7 +15,7 @@ def open_file(filename, mode):
     return open(filename, mode, encoding=encoding)
 
 def lua_val_to_markdown_table(_in, output_file):
-    pattern = re.compile(r"^\s*([a-zA-Z0-9_\.]+)\s*=\s*([0-9]+)\s*(?:;)?\s*(?:--(.*))?$")
+    pattern = re.compile(r"^\s*([a-zA-Z0-9_\.]+)\s*=\s*([0-9]+)\s*(?:[;,])?\s*(?:--(.*))?$")
     headers=['name','val','comment']
     rows = []
     for line in fileinput.FileInput(files=_in,openhook=open_file):
@@ -37,5 +37,5 @@ def lua_val_to_markdown_table(_in, output_file):
     with open(output_file, 'w') as file:
         file.write(table)
 
-## 调用函数
-#lua_val_to_markdown_table('G:/CodeBase.pgame/pserver/.vimtmp.filename.5.txt', 'G:/CodeBase.pgame/pserver/.vimtmp.filename.6.txt')
+### 调用函数
+#lua_val_to_markdown_table('G:/CodeBase.pgame/pserver/.vimtmp.filename.0.txt', 'G:/CodeBase.pgame/pserver/.vimtmp.filename.1.txt')

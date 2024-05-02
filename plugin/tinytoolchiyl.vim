@@ -110,6 +110,9 @@ if has('gui_running')
         anoremenu <silent> PopUp.T&inytool.pgame.add_debugline
                     \ : call tinytoolchiyl#base#pgameinfo#add_debugline()<CR>
 
+        anoremenu <silent> PopUp.T&inytool.pgame.tlog_to_json
+                    \ : call tinytoolchiyl#base#tlog_to_json_on_pgamesvr#Doit()<CR>
+
         anoremenu <silent> PopUp.T&inytool.select_xml_struct_to_markdowtable
                     \ :call tinytoolchiyl#base#xml2markdowntable#pgame()<CR>
 
@@ -130,6 +133,9 @@ if has('gui_running')
 
         anoremenu <silent> PopUp.T&inytool.sort_uniq
                     \ :'<,'>sort u<CR> :echom "sort u" <CR>
+
+        anoremenu <silent> PopUp.T&inytool.sort_by_datetimestr
+                    \ :call tinytoolchiyl#base#myutil#sort_by_datetimestr()<CR>
 
         anoremenu <silent> PopUp.T&inytool.lgame.p4.edit_all_protocol_files
                     \ :call ctrlp#myp4#P4Protocol()<CR><CR>:call ctrlp#myp4#P4Opened()<CR><CR>

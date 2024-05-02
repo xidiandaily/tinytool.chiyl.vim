@@ -8,7 +8,7 @@
 
 " 将十六进制数字转成10进制数字
 function! tinytoolchiyl#base#hexToDec#SelectHexToDec()
-    let sel = s:GetSelectedText()
+    let sel = tinytoolchiyl#base#myutil#get_selected_text()
 
     let hex_pattern = '\v0x[0-9a-fA-F]+'
     let hex_string = matchstr(sel, hex_pattern)

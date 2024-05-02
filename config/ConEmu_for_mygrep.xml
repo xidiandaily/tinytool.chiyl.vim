@@ -738,7 +738,6 @@
 				<line data='"cd G:\\CodeBase.github\\vim\\vimfiles\\bundle\\tinytool.chiyl.vim\\plugin"'/>
 				<line data='"cd G:\CodeBase.github\vim\vimfiles\bundle\tinytool.chiyl.vim\plugin"'/>
 				<line data="G:\CodeBase.github\vim\vimfiles\bundle\tinytool.chiyl.vim\plugin"/>
-				<line data="{Shells::cmd}"/>
 			</value>
 			<value name="ResetTerminalConfirm" type="hex" data="01"/>
 		</key>

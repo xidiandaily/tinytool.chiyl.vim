@@ -33,7 +33,7 @@ def zone_deal_tconnd_pkg_to_cmd(_in,_out,cscmd_xml):
     out['lines']=[]
     for line in fileinput.FileInput(files=_in,openhook=open_file):
         line=line.strip()
-        match = re.search('Cmd\[(\d+)\]',line)
+        match = re.search(r'Cmd\[(\d+)\]',line)
         if not match:
             out['lines'].append(line)
             continue

@@ -33,7 +33,7 @@ def asyncid_to_info(_in,_out):
     out['lines']=[]
     for line in fileinput.FileInput(files=_in,openhook=open_file):
         line=line.strip()
-        ret_lists=re.findall('(\d+)',line)
+        ret_lists=re.findall(r'(\d+)',line)
         if len(ret_lists)==0:
             out['lines'].append(line)
             continue

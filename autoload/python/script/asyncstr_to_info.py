@@ -33,7 +33,7 @@ def asyncstr_to_info2(_in,_out):
     out['lines']=[]
     for line in fileinput.FileInput(files=_in,openhook=open_file):
         line=line.strip()
-        match = re.search('(\d+)_(\d+)_(\d+)_(\d+)(-(.*?))?',line)
+        match = re.search(r'(\d+)_(\d+)_(\d+)_(\d+)(-(.*?))?',line)
         if not match:
             out['lines'].append(line)
             continue
@@ -51,7 +51,7 @@ def asyncstr_to_info(_in,_out):
     out['lines']=[]
     for line in fileinput.FileInput(files=_in,openhook=open_file):
         line=line.strip()
-        ret_lists=re.findall('(\d+)_(\d+)_(\d+)_(\d+)(-(.*?))?',line)
+        ret_lists=re.findall(r'(\d+)_(\d+)_(\d+)_(\d+)(-(.*?))?',line)
         if len(ret_lists)==0:
             out['lines'].append(line)
             continue

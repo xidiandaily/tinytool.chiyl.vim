@@ -28,7 +28,7 @@ def zone_send_to_client_cs_msg(_in,_out):
     out['lines']=[]
     for line in fileinput.FileInput(files=_in,openhook=open_file):
         line=line.strip()
-        match = re.search('cmd=(\d+) eno=(\d+)\.',line)
+        match = re.search(r'cmd=(\d+) eno=(\d+)\.',line)
         if not match:
             out['lines'].append(line)
             continue

@@ -7,13 +7,13 @@
 "==============================================================================
 
 fu! luaproj#init()
-    #let s:map_F12=maparg('<F12>')
-    #if exists('g:proj_type') && g:proj_type=='vim'
-    #    "echohl WarningMsg | echom "has already define luaproj"| echohl None
-    #    "do nothing
-    #else
-    #    :map <buffer> <F12> :silent execute '!ctags -f vim.tags -R --languages=Vim --c++-kinds=+p --fields=+iaS  .'<CR><CR>
-    #endif
+    "let s:map_F12=maparg('<F12>')
+    "if exists('g:proj_type') && g:proj_type=='vim'
+    "    "echohl WarningMsg | echom "has already define luaproj"| echohl None
+    "    "do nothing
+    "else
+    "    :map <buffer> <F12> :silent execute '!ctags -f vim.tags -R --languages=Vim --c++-kinds=+p --fields=+iaS  .'<CR><CR>
+    "endif
     return 0
 endfu
 

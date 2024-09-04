@@ -63,7 +63,7 @@ def tlog_to_json_on_pgamesvr(_in,_out,tlog_path):
 
     out['table']=desc
     with open(_out,'w',encoding="utf-8") as fileObj:
-        json.dump(out,fileObj,indent=4)
+        json.dump(out,fileObj,indent=4,ensure_ascii=False)
 
 #tlog_path='G:/CodeBase.pgame/pserver/bin/luascript/tlog_desc/generate_tdw/apgame_tdw_tlog.xml'
 #in_path="G:/CodeBase.pgame/pserver/.vimtmp.filename.32.txt"

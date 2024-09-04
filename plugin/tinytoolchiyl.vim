@@ -113,11 +113,42 @@ if has('gui_running')
         anoremenu <silent> PopUp.T&inytool.pgame.tlog_to_json
                     \ : call tinytoolchiyl#base#tlog_to_json_on_pgamesvr#Doit()<CR>
 
-        anoremenu <silent> PopUp.T&inytool.select_xml_struct_to_markdowtable
+        anoremenu <silent> PopUp.T&inytool.pgame.log_to_json_{a=hello}_to_{"a":"hello"}
+                    \ : call tinytoolchiyl#base#pgame_log_convert_to_json#Doit()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.fuzzy_match.select_left_text_for_match
+                    \ : call tinytoolchiyl#base#fuzzy_match#select_left_text_for_match()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.fuzzy_match.do_match_select_right_text
+                    \ : call tinytoolchiyl#base#fuzzy_match#match_right_text()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.fuzzy_match.help
+                    \ : call tinytoolchiyl#base#fuzzy_match#help()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.marks.list_all_marks
+                    \ : marks<CR>
+
+        anoremenu <silent> PopUp.T&inytool.marks.clear_all_supercase_marks
+                    \ : delmarks A-Z \| marks <CR>
+
+
+        anoremenu <silent> PopUp.T&inytool.markdown.select_xml_struct_to_markdowtable.run
                     \ :call tinytoolchiyl#base#xml2markdowntable#pgame()<CR>
 
-        anoremenu <silent> PopUp.T&inytool.select_lua_val_to_table
+        anoremenu <silent> PopUp.T&inytool.markdown.select_xml_struct_to_markdowtable.help
+                    \ :call tinytoolchiyl#base#xml2markdowntable#help()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.markdown.select_lua_val_to_table.run
                     \ :call tinytoolchiyl#base#lua_value_to_markdown_table#pgame()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.markdown.select_lua_val_to_table.help
+                    \ :call tinytoolchiyl#base#lua_value_to_markdown_table#help()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.markdown.emmylua_class_to_table.run
+                    \ :call tinytoolchiyl#base#lua_value_to_markdown_table#emmylua_class_to_markdown_table()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.markdown.emmylua_class_to_table.help
+                    \ :call tinytoolchiyl#base#lua_value_to_markdown_table#emmylua_class_to_markdown_table_help()<CR>
 
         anoremenu <silent> PopUp.T&inytool.select_hex_to_dec
                     \ :call tinytoolchiyl#base#hexToDec#SelectHexToDec()<CR>

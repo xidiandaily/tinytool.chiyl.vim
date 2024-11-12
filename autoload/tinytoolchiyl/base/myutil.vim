@@ -35,7 +35,7 @@ function! tinytoolchiyl#base#myutil#get_selected_text() abort
 endfunction
 
 function! tinytoolchiyl#base#myutil#add_ag_search_ignore_files()
-    let s:out='.agignore'
+    let s:out='_agignore'
     call ctrlp#mybase#ctrlp_open_new_win(s:out,1)
 endfunction
 

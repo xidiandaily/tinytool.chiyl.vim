@@ -62,7 +62,7 @@ endfunction
 function! tinytoolchiyl#base#lua_value_to_markdown_table#emmylua_class_to_markdown_table_help()
     echom "选中xml结构，鼠标右键选择: Tinytool->markdown->emmylua_class_to_table->run"
     echom "================================================================================"
-    echom "---test"
+    echom "---testtitle"
     echom "---@class testforexample"
     echom "---@field f1 number @字段1"
     echom "---@field f2 string @字段2"
@@ -71,7 +71,7 @@ function! tinytoolchiyl#base#lua_value_to_markdown_table#emmylua_class_to_markdo
     echom " "
     echom " "
     echom "================================================================================"
-    echom "| | testforexample |"
+    echom "| | testtitle testforexample |"
     echom "| --- | --- | --- |"
     echom "| f1 | number | @字段1 |"
     echom "| f2 | string | @字段2 |"

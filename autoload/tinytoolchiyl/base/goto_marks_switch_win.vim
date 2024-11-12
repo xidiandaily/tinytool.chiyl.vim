@@ -1,64 +1,176 @@
 "==============================================================================
-" Description: global plugin for lawrencechi
+" Description: 在任意模式下跳转到上一个/下一个编辑位置
 " Author:      lawrencechi <codeforfuture <at> 126.com>
 " Last Change: 2023.10.24
 " License:     This file is placed in the public domain.
 " Version:     1.0.0
 "==============================================================================
+" 功能说明:
+" 这是一个用于在vim中跟踪和导航编辑位置的插件。主要功能包括：
+" 1. 自动记录用户在不同文件中的编辑位置
+" 2. 支持在多窗口环境下跳转到上一个/下一个编辑位置
+" 3. 智能处理文件内容变化，自动更新编辑位置
+" 4. 提供简单的快捷键操作方式
+"
+" 设计方案:
+" 1. 数据结构：
+"    - 使用列表存储编辑位置信息(s:edit_positions)
+"    - 每个位置记录包含：光标位置、buffer编号、行内容、行号
+"
+" 2. 核心功能：
+"    - SaveEditPosition(): 保存当前编辑位置
+"    - UpdateEditPositions(): 更新位置信息以适应文件变化
+"    - GotoPrevEdit()/GotoNextEdit(): 在编辑位置间导航
+"
+" 3. 自动触发：
+"    - 在文本改变时自动更新编辑位置
+"==============================================================================
 
-"在分割窗口跳转的时候，有时候需要调转N个窗口找到信息并拷贝,这个时候需要跳回原来的
-"编辑窗口，需要多次跳转回来，比较麻烦，这个函数采用了一个解决方案：
-"1，跳转前，将当前的编辑窗口设置为标记 A(按键:m+A)
-"2，跳转多个窗口，到另一个目标窗口拷贝到想要的内容，或者查看到具体内容，此时使用快捷键
-"   \W+A 就能跳转回标记为A的位置，非常方便
-function! tinytoolchiyl#base#goto_marks_switch_win#doit(mark)
-    let l:current_winnr = winnr()
-    let l:current_bufnr = bufnr('%')
-    let l:found = 0
+" 保存跳转位置的列表
+let s:edit_positions = []
+" 当前位置索引
+let s:current_position_index = -1
 
-    for winnr in range(1, winnr('$'))
-        let bufnr = winbufnr(winnr)
-        let mark_position = getpos("'" . a:mark)
-        if mark_position[0] == bufnr && winnr != l:current_winnr
-            let l:topline = getwininfo(win_getid(winnr))[0]['topline']
-            let l:botline = getwininfo(win_getid(winnr))[0]['botline']
-            if mark_position[1] >= l:topline && mark_position[1] <= l:botline
-                execute winnr . "wincmd w"
-                execute "normal! `" . a:mark
-                let l:found = 1
-                break
+" 保存编辑位置
+function! tinytoolchiyl#base#goto_marks_switch_win#SaveEditPosition()
+    let pos = getpos('.')
+    let bufnr = bufnr('%')
+    " 检查文件是否真实存在
+    if !filereadable(bufname(bufnr))
+        return
+    endif
+    let line_content = getline(pos[1])
+    let new_entry = {'pos': pos, 'bufnr': bufnr, 'line': line_content, 'line_number': pos[1]}
+    
+    " 检查是否已经存在相同位置的记录
+    for i in range(len(s:edit_positions))
+        if s:edit_positions[i].line_number == pos[1] && s:edit_positions[i].bufnr == bufnr
+            " 如果存在，删除旧记录
+            call remove(s:edit_positions, i)
+            break
+        endif
+    endfor
+    
+    " 添加新记录
+    call add(s:edit_positions, new_entry)
+    let s:current_position_index = len(s:edit_positions) - 1
+
+    " 更新编辑位置以适应文件的变化
+    call tinytoolchiyl#base#goto_marks_switch_win#UpdateEditPositions()
+
+    " 打印 edit_positions 里面的信息，按照顺序输出
+    echom "编辑位置列表:"
+    for pos_info in s:edit_positions
+        echom "buffer号: " . pos_info.bufnr . ", 行号: " . pos_info.line_number . ", 行内容: " . pos_info.line
+    endfor
+endfunction
+
+" 更新编辑位置以适应文件的变化
+function! tinytoolchiyl#base#goto_marks_switch_win#UpdateEditPositions()
+    let wininfo = getwininfo(win_getid(winnr()))
+    for pos_info in s:edit_positions
+        if pos_info.bufnr == wininfo[0].bufnr
+            let current_line = getline(pos_info.line_number)
+            " 如果行内容不匹配，尝试在附近查找匹配的行
+            if current_line !=# pos_info.line
+                let found = 0
+                for offset in range(-5, 5)
+                    if pos_info.line_number + offset > 0 && getline(pos_info.line_number + offset) ==# pos_info.line
+                        let pos_info.line_number += offset
+                        let found = 1
+                        break
+                    endif
+                endfor
+                " 如果没有找到匹配的行，标记为无效
+                if !found
+                    let pos_info.line_number = -1
+                endif
             endif
         endif
     endfor
-
-    if l:found == 0
-        echo "HEI Mark not found in any other visible window"
-    endif
 endfunction
 
-function! tinytoolchiyl#base#goto_marks_switch_win#last_edit_pos()
-    let l:current_winnr = winnr()
-    let l:current_bufnr = bufnr('%')
-    let l:found = 0
-
-    for winnr in range(1, winnr('$'))
-        let bufnr = winbufnr(winnr)
-        let mark_position = g:tinytool_chiyl_last_postion
-        if mark_position[0] == bufnr && winnr != l:current_winnr
-            let l:topline = getwininfo(win_getid(winnr))[0]['topline']
-            let l:botline = getwininfo(win_getid(winnr))[0]['botline']
-            if mark_position[1] >= l:topline && mark_position[1] <= l:botline
-                execute winnr . "wincmd w"
-                call setpos('.',[0]+mark_position[1:])
-                let l:found = 1
+" 跳转到上一个编辑位置
+function! tinytoolchiyl#base#goto_marks_switch_win#GotoPrevEdit()
+    if empty(s:edit_positions)
+        echom "没有找到上一个编辑位置"
+        return
+    endif
+    
+    if s:current_position_index > 0
+        let s:current_position_index -= 1
+        let pos_info = s:edit_positions[s:current_position_index]
+        let current_win = winnr()
+        let found_win = 0
+        
+        " 遍历所有窗口，查找显示目标位置的窗口
+        for win in range(1, winnr('$'))
+            let wininfo = getwininfo(win_getid(win))
+            echom "win: " . win . " bufnr: " . wininfo[0].bufnr . " pos_info.bufnr: " . pos_info.bufnr
+            if wininfo[0].bufnr == pos_info.bufnr
+                " 如果找到窗口，切换到该窗口
+                execute win . 'wincmd w'
+                call setpos('.', pos_info.pos)
+                let found_win = 1
                 break
             endif
+        endfor
+        
+        " 如果没有找到合适的窗口，在当前窗口打开buffer
+        if !found_win
+            " 回到原始窗口
+            execute current_win . 'wincmd w'
+            " 在当前窗口切换buffer
+            execute 'buffer ' . pos_info.bufnr
+            call setpos('.', pos_info.pos)
         endif
-    endfor
-
-    if l:found == 0
-        echo "not found any pos information"
+    else
+        echom "已经是最早的编辑位置"
     endif
 endfunction
 
+" 跳转到下一个编辑位置
+function! tinytoolchiyl#base#goto_marks_switch_win#GotoNextEdit()
+    if empty(s:edit_positions)
+        echom "没有找到下一个编辑位置"
+        return
+    endif
+    
+    if s:current_position_index < len(s:edit_positions) - 1
+        let s:current_position_index += 1
+        let pos_info = s:edit_positions[s:current_position_index]
+        let current_win = winnr()
+        let found_win = 0
+        
+        " 遍历所有窗口，查找显示目标位置的窗口
+        for win in range(1, winnr('$'))
+            let wininfo = getwininfo(win_getid(win))
+            echom "win: " . win . " bufnr: " . wininfo[0].bufnr . " pos_info.bufnr: " . pos_info.bufnr
+            if wininfo[0].bufnr == pos_info.bufnr
+                " 如果找到窗口，切换到该窗口
+                execute win . 'wincmd w'
+                call setpos('.', pos_info.pos)
+                let found_win = 1
+                break
+            endif
+        endfor
+        
+        " 如果没有找到合适的窗口，在当前窗口打开buffer
+        if !found_win
+            " 回到原始窗口
+            execute current_win . 'wincmd w'
+            " 在当前窗口切换buffer
+            execute 'buffer ' . pos_info.bufnr
+            call setpos('.', pos_info.pos)
+        endif
+    else
+        echom "已经是最新的编辑位置"
+    endif
+endfunction
+
+" 设置自动命令以保存编辑位置和更新位置信息
+augroup EditPositionTracking
+    autocmd!
+    autocmd TextChanged,TextChangedI * call tinytoolchiyl#base#goto_marks_switch_win#SaveEditPosition()
+augroup END
 

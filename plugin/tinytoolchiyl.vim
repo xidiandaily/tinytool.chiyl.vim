@@ -128,9 +128,23 @@ if has('gui_running')
         anoremenu <silent> PopUp.T&inytool.marks.list_all_marks
                     \ : marks<CR>
 
+        anoremenu <silent> PopUp.T&inytool.marks.list_all_marks_with_content
+                    \ : call tinytoolchiyl#base#my_marks#list_all_global_marks()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.marks.output_all_global_marks_to_file
+                    \ : call tinytoolchiyl#base#my_marks#output_all_global_marks_to_file()<CR>
+
         anoremenu <silent> PopUp.T&inytool.marks.clear_all_supercase_marks
                     \ : delmarks A-Z \| marks <CR>
 
+        anoremenu <silent> PopUp.T&inytool.marks.save_all_supercase_to_file
+                    \ : call tinytoolchiyl#base#my_marks#azmarks_save() <CR>
+
+        anoremenu <silent> PopUp.T&inytool.marks.load_all_supercase_from_file
+                    \ : call tinytoolchiyl#base#my_marks#azmarks_load() <CR>
+
+        anoremenu <silent> PopUp.T&inytool.marks.show_save_history_file
+                    \ : call tinytoolchiyl#base#my_marks#show_history() <CR>
 
         anoremenu <silent> PopUp.T&inytool.markdown.select_xml_struct_to_markdowtable.run
                     \ :call tinytoolchiyl#base#xml2markdowntable#pgame()<CR>
@@ -149,6 +163,31 @@ if has('gui_running')
 
         anoremenu <silent> PopUp.T&inytool.markdown.emmylua_class_to_table.help
                     \ :call tinytoolchiyl#base#lua_value_to_markdown_table#emmylua_class_to_markdown_table_help()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.search_select_text.Mygrep
+                    \ :call tinytoolchiyl#base#mygrep#mygrep_select_text()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.search_select_text.grep
+                    \ :call tinytoolchiyl#base#mygrep#grep_select_text()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.search_select_text.grep_add
+                    \ :call tinytoolchiyl#base#mygrep#grepadd_select_text()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.search_select_text.history_search_result
+                    \ :chi<CR>
+
+        anoremenu <silent> PopUp.T&inytool.search_select_text.last_search_result
+                    \ :colder<CR>
+
+        anoremenu <silent> PopUp.T&inytool.search_select_text.next_search_result
+                    \ :cnewer<CR>
+
+        anoremenu <silent> PopUp.T&inytool.search_select_text.newest_search_result
+                    \ :cnewer 99<CR>
+
+        anoremenu <silent> PopUp.T&inytool.search_select_text.help
+                    \ :call tinytoolchiyl#base#mygrep#help()<CR>
+        
 
         anoremenu <silent> PopUp.T&inytool.select_hex_to_dec
                     \ :call tinytoolchiyl#base#hexToDec#SelectHexToDec()<CR>
@@ -238,24 +277,9 @@ if has('gui_running')
     endif
 endif
 
-"窗口间快速跳转标记位置
-command! -nargs=1 WinGotoMark call tinytoolchiyl#base#goto_marks_switch_win#doit(<q-args>)
-for mark in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-    execute "nnoremap <Leader>W" . mark . " :WinGotoMark " . mark . "<CR>"
-endfor
-
-" 初始化全局变量
-let g:tinytool_chiyl_last_postion = [0, 0, 0, 0]
-" 创建自动命令组
-augroup TinyToolUpdateLastPosition
-    " 清除可能已存在的自动命令
-    autocmd!
-
-    " 每次光标移动时，将当前位置存储在 g:last_position 变量中
-    autocmd InsertLeave * let curpos = getpos('.') | let curbufnr=bufnr('%') | let g:tinytool_chiyl_last_postion=[curbufnr]+curpos[1:]
-augroup END
-
-nnoremap <Leader>WW :call tinytoolchiyl#base#goto_marks_switch_win#last_edit_pos()<CR>
+"在普通模式下跳转到上一个/下一个编辑位置
+nmap <silent> <Leader>ep :call tinytoolchiyl#base#goto_marks_switch_win#GotoPrevEdit()<CR>
+nmap <silent> <Leader>en :call tinytoolchiyl#base#goto_marks_switch_win#GotoNextEdit()<CR>
 
 "创建自定义命令
 command! -nargs=1 Mygrep call tinytoolchiyl#base#mygrep#mygrep(<f-args>)

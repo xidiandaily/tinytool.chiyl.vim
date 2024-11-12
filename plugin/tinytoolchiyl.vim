@@ -187,7 +187,18 @@ if has('gui_running')
 
         anoremenu <silent> PopUp.T&inytool.search_select_text.help
                     \ :call tinytoolchiyl#base#mygrep#help()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.jump_edit.prev
+                    \ :call tinytoolchiyl#base#goto_marks_switch_win#GotoPrevEdit()<CR>
         
+        anoremenu <silent> PopUp.T&inytool.jump_edit.next
+                    \ :call tinytoolchiyl#base#goto_marks_switch_win#GotoNextEdit()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.jump_edit.show
+                    \ :call tinytoolchiyl#base#goto_marks_switch_win#ShowEditPositions()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.jump_edit.help
+                    \ :call tinytoolchiyl#base#goto_marks_switch_win#ShowHelp()<CR>
 
         anoremenu <silent> PopUp.T&inytool.select_hex_to_dec
                     \ :call tinytoolchiyl#base#hexToDec#SelectHexToDec()<CR>
@@ -277,10 +288,6 @@ if has('gui_running')
     endif
 endif
 
-"在普通模式下跳转到上一个/下一个编辑位置
-nmap <silent> <Leader>ep :call tinytoolchiyl#base#goto_marks_switch_win#GotoPrevEdit()<CR>
-nmap <silent> <Leader>en :call tinytoolchiyl#base#goto_marks_switch_win#GotoNextEdit()<CR>
-
 "创建自定义命令
 command! -nargs=1 Mygrep call tinytoolchiyl#base#mygrep#mygrep(<f-args>)
 
@@ -301,4 +308,16 @@ command! -nargs=1 Mygrep call tinytoolchiyl#base#mygrep#mygrep(<f-args>)
 :tmenu ToolBar.Tinytool_Addline 给当前添加一个调试语句 log_info("chiyl debuginfo")
 :amenu icon=tinytool_logtree.bmp ToolBar.Tinytool_Logtree :call tinytoolchiyl#base#pgameinfo#add_log_tree()<CR>
 :tmenu ToolBar.Tinytool_Logtree 给当前添加一个调试语句 log_tree_info("chiyl debuginfo:")
+
+
+" 设置自动命令以保存编辑位置和更新位置信息
+augroup EditPositionTracking
+    autocmd!
+    autocmd TextChanged,TextChangedI * call tinytoolchiyl#base#goto_marks_switch_win#SaveEditPosition()
+augroup END
+"在普通模式下跳转到上一个/下一个编辑位置
+nmap <silent> <Leader>ep :call tinytoolchiyl#base#goto_marks_switch_win#GotoPrevEdit()<CR>
+nmap <silent> <Leader>en :call tinytoolchiyl#base#goto_marks_switch_win#GotoNextEdit()<CR>
+nmap <silent> <Leader>es :call tinytoolchiyl#base#goto_marks_switch_win#ShowEditPositions()<CR>
+nmap <silent> <Leader>eh :call tinytoolchiyl#base#goto_marks_switch_win#ShowHelp()<CR>
 

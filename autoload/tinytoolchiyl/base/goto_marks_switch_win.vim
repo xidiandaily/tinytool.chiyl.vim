@@ -53,10 +53,11 @@ function! tinytoolchiyl#base#goto_marks_switch_win#SaveEditPosition()
     
     " 添加新记录
     call add(s:edit_positions, new_entry)
-    let s:current_position_index = len(s:edit_positions) - 1
 
     " 更新编辑位置以适应文件的变化
     call tinytoolchiyl#base#goto_marks_switch_win#UpdateEditPositions()
+
+    let s:current_position_index = len(s:edit_positions) - 1
 
     " 打印 edit_positions 里面的信息，按照顺序输出
     "echom "编辑位置列表:"
@@ -68,7 +69,9 @@ endfunction
 " 更新编辑位置以适应文件的变化
 function! tinytoolchiyl#base#goto_marks_switch_win#UpdateEditPositions()
     let wininfo = getwininfo(win_getid(winnr()))
-    for pos_info in s:edit_positions
+    let i = 0
+    while i < len(s:edit_positions)
+        let pos_info = s:edit_positions[i]
         if pos_info.bufnr == wininfo[0].bufnr
             let current_line = getline(pos_info.line_number)
             " 如果行内容不匹配，尝试在附近查找匹配的行
@@ -81,13 +84,15 @@ function! tinytoolchiyl#base#goto_marks_switch_win#UpdateEditPositions()
                         break
                     endif
                 endfor
-                " 如果没有找到匹配的行，标记为无效
+                " 如果没有找到匹配的行，从历史记录中删除
                 if !found
-                    let pos_info.line_number = -1
+                    call remove(s:edit_positions, i)
+                    continue
                 endif
             endif
         endif
-    endfor
+        let i += 1
+    endwhile
 endfunction
 
 " 跳转到上一个编辑位置

@@ -198,7 +198,16 @@ if has('gui_running')
                     \ :call tinytoolchiyl#base#goto_marks_switch_win#ShowEditPositions()<CR>
 
         anoremenu <silent> PopUp.T&inytool.jump_edit.help
-                    \ :call tinytoolchiyl#base#goto_marks_switch_win#ShowHelp()<CR>
+                    \ :call tinytoolchiyl#base#goto_marks_switch_win#ShowHelp()<CR> 
+
+        anoremenu <silent> PopUp.T&inytool.flomo.upload
+                    \ :call tinytoolchiyl#base#flomo#flomo_upload()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.flomo.edit_config
+                    \ :call tinytoolchiyl#base#flomo#edit_config()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.flomo.help
+                    \ :call tinytoolchiyl#base#flomo#help()<CR>
 
         anoremenu <silent> PopUp.T&inytool.select_hex_to_dec
                     \ :call tinytoolchiyl#base#hexToDec#SelectHexToDec()<CR>

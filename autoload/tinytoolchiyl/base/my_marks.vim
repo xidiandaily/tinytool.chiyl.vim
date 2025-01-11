@@ -189,7 +189,9 @@ function! tinytoolchiyl#base#my_marks#azmarks_save()
     let l:az_marks = filter(l:marks, {_, v -> v.mark =~ '^''[A-Z]'})
 
     " 使用 gvim 的 browse confirm 弹窗选择另存为的文件路径
-    let l:savefile = browse('confirm saveas', 'Select file to save marks', '','')
+    let l:mydate=strftime("%Y%M%d_%H_%M")
+    let l:default_filename=(exists('g:proj_type') ? g:proj_type:'tmpfile') . '_' . l:mydate .".gVimAZMarks"
+    let l:savefile = browse('confirm saveas', 'Select file to save marks', '',l:default_filename)
 
     if len(l:savefile) == 0
         echom "取消保存"
@@ -236,7 +238,7 @@ endfunction
 " 从文件加载 A-Z 全局标记，使用 gvim 弹窗选择加载的文件
 function! tinytoolchiyl#base#my_marks#azmarks_load()
     " 使用 gvim 的 browse confirm 弹窗选择要加载的文件
-    let l:loadfile = browse('confirm e', 'Select file to load marks', '','')
+    let l:loadfile = browse('confirm e', 'Select file to load marks', '','tmpfile.gVimAZMarks')
 
     " 校验文件是否存在
     if filereadable(l:loadfile)

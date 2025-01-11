@@ -99,6 +99,7 @@ import urllib.error
 try:
     url = vim.eval('g:flomo_url')
     content = vim.eval('l:content')
+    flomo_log_enabled = vim.eval('g:flomo_log_enabled')
     
     data = json.dumps({'content': content}).encode('utf-8')
     headers = {'Content-Type': 'application/json'}
@@ -106,7 +107,8 @@ try:
     req = urllib.request.Request(url, data=data, headers=headers, method='POST')
     with urllib.request.urlopen(req) as response:
         result = response.read().decode('utf-8')
-        vim.command('let l:result = "' + result.replace('"', '\\"') + '"')
+        if flomo_log_enabled == 1:
+            vim.command('let l:result = "' + result.replace('"', '\\"') + '"')
         vim.command('let l:success = 1')
 except Exception as e:
     error_msg = str(e).replace('"', '\\"')

@@ -11,13 +11,8 @@ if exists('b:did_ftplugin')
     finish
 endif
 
-if !exists('g:flomo_tags')
-    let g:flomo_tags = []
-endif
-
-if !exists('g:flomo_url')
-    let g:flomo_url = ''
-endif
+let g:flomo_tags = get(g:, 'flomo_tags', [])
+let g:flomo_url  = get(g:, 'flomo_url',  '')
 
 let b:did_ftplugin = 1
 

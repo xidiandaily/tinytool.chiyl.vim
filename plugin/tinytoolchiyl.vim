@@ -209,6 +209,12 @@ if has('gui_running')
         anoremenu <silent> PopUp.T&inytool.flomo.help
                     \ :call tinytoolchiyl#base#flomo#help()<CR>
 
+        anoremenu <silent> PopUp.T&inytool.python.ruff_format
+                    \ :call tinytoolchiyl#base#mypython#ruff_format()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.python.ruff_check_fix
+                    \ :call tinytoolchiyl#base#mypython#ruff_check_fix()<CR>
+
         anoremenu <silent> PopUp.T&inytool.select_hex_to_dec
                     \ :call tinytoolchiyl#base#hexToDec#SelectHexToDec()<CR>
 

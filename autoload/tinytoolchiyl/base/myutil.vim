@@ -6,6 +6,12 @@
 " Version:     1.0.0
 "==============================================================================
 
+function! tinytoolchiyl#base#myutil#define_fileheader()
+    let fname=toupper(substitute(fnamemodify(expand('%:t'),':t'),'\..*','','g')) 
+    let g='__H_'.fname.'_H__' 
+    call append(line('.')-1, ['#ifndef '.g, '#define '.g, '', '', '#endif // '.g])
+endfunction
+
 function! tinytoolchiyl#base#myutil#get_user_input_num(tip,default_val)
     let s:num=input(a:tip.' (default:'.a:default_val.'):')
     if str2nr(s:num,10) == 0

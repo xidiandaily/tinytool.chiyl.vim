@@ -164,6 +164,12 @@ if has('gui_running')
         anoremenu <silent> PopUp.T&inytool.markdown.emmylua_class_to_table.help
                     \ :call tinytoolchiyl#base#lua_value_to_markdown_table#emmylua_class_to_markdown_table_help()<CR>
 
+        anoremenu <silent> PopUp.T&inytool.markdown.image_paste.run
+                    \ :call mdip#MarkdownClipboardImage()<CR>
+
+        anoremenu <silent> PopUp.T&inytool.markdown.image_paste.help
+                    \ :echom "查看 bundle/img-paste.vim/README.md"<CR>
+
         anoremenu <silent> PopUp.T&inytool.search_select_text.Mygrep
                     \ :call tinytoolchiyl#base#mygrep#mygrep_select_text()<CR>
 

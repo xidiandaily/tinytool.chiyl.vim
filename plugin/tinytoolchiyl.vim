@@ -306,6 +306,8 @@ if has('gui_running')
                     \ :call tinytoolchiyl#base#find_no_use_asyncid#ssmsgid()<CR>
         anoremenu <silent> PopUp.T&inytool.lgame.env.update_xml_to_lua
                     \ :!start cmd.exe /c "cd /d D:/GitBase/myLGameTools/proto2lua/dist/ && proto2lua.exe -i G:/CodeBase.p4/main.testclient.Server_proj/protocol -o G:/CodeBase.p4/main.testclient.Server_proj/tools/testclient/script/doc"<CR>
+        anoremenu <silent> PopUp.T&inytool.dnf.tlog.tlog_to_json
+                    \ :call tinytoolchiyl#base#tlog_to_json_on_dnf_idip2svr#Doit()<CR>
     endif
 endif
 
